@@ -1,75 +1,44 @@
-# React + TypeScript + Vite
+# 🗂️ Kanban Board (React + TypeScript + Tailwind)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A small, clean **Kanban board** built with **React + TypeScript + Vite** and styled by **TailwindCSS**.  
+It focuses on code clarity, local state management, and a simple UX — suitable for learning and portfolio.
 
-Currently, two official plugins are available:
+## ✨ Features
+- Add / Edit / Delete cards
+- Move between **Todo → Doing → Done**
+- **Drag & Drop** (HTML5) between columns
+- **LocalStorage** persistence (cards remain after refresh)
+- Minimal, responsive UI with Tailwind
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🛠 Tech Stack
+- **React** + **TypeScript** + **Vite**
+- **TailwindCSS** (no UI kit)
+- HTML5 **Drag & Drop** (no extra libs)
 
-## React Compiler
+## 📂 Project Structure
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+kanban-board/ src/ App.tsx # main UI, DnD, state, persistence main.tsx index.css # @tailwind base/components/utilities index.html tailwind.config.js postcss.config.js tsconfig.json package.json
 
-Note: This will impact Vite dev & build performances.
+## ▶ Run locally
+```bash
+npm install
+npm run dev
 
-## Expanding the ESLint configuration
+Open: http://localhost:5173
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+🔍 How it works (short)
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+Cards are stored in a React state and persisted to LocalStorage:
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+on load: JSON.parse(localStorage.getItem("kanban-cards") ?? "[]")
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+on change: localStorage.setItem("kanban-cards", JSON.stringify(cards))
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+DnD: each card is draggable; columns handle onDragOver + onDrop to update the card’s column.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+
+🧑‍💻 Author
+
+Erfan Bashiri - Ali Bashiri — focused on practical, readable, and maintainable front-end code.
+GitHub: https://github.com/ErfanBashiri95
